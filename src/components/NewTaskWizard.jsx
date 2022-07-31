@@ -38,7 +38,7 @@ const NewTaskWizard = ({ setShowTaskWizard }) => {
         <div className="mb-1">
           <textarea
             onKeyUp={handleHeight}
-            className="w-full py-2 text-gray-900 placeholder-gray-400 align-baseline bg-transparent desc-area font-default focus:outline-none max-h-60"
+            className="w-full py-2 text-gray-900 placeholder-gray-400 align-baseline bg-transparent font-default focus:outline-none max-h-60"
             name="description"
             // value={}
             // onChange={(e) => setEmail(e.target.value)}

@@ -1,9 +1,15 @@
 import React from 'react';
 
-const Overlay = ({ setShowTaskWizard }) => {
+const Overlay = ({ showTaskWizard, showEditTaskWizard, setShowTaskWizard, setShowEditTaskWizard }) => {
   return (
     <div
-      onClick={() => setShowTaskWizard(false)}
+      onClick={() => {
+        if (showTaskWizard) {
+          setShowTaskWizard(false);
+        } else if (showEditTaskWizard) {
+          setShowEditTaskWizard(false);
+        }
+      }}
       className="absolute top-0 left-0 z-10 w-full h-full bg-gray-800 opacity-50"
     ></div>
   );

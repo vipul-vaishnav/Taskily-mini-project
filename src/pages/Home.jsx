@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import Plus from './../icons/Plus';
 import { useSelector } from 'react-redux';
 
-const Home = ({ setShowTaskWizard }) => {
+const Home = ({ setShowTaskWizard, setShowEditTaskWizard }) => {
   const { user } = useSelector((state) => state.auth);
 
   return (
@@ -60,7 +60,7 @@ const Home = ({ setShowTaskWizard }) => {
           </ul>
         </div>
       </section>
-      <Outlet />
+      <Outlet context={setShowEditTaskWizard} />
     </div>
   );
 };
