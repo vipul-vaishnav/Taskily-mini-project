@@ -35,9 +35,7 @@ const Entry = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success(message);
-      setTimeout(() => {
-        navigate('/home');
-      }, 3000);
+      navigate('/home');
     }
 
     if (isError) {
