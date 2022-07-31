@@ -3,18 +3,18 @@
 @tailwind utilities;
 
 /* Width */
-.desc-area::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
-.desc-area::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   border-radius: 20rem;
   background: #f3f4f6;
 }
 
 /* Handle */
-.desc-area::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   border-radius: 20rem;
   background: #111827;
 }
