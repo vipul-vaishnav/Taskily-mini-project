@@ -11,6 +11,9 @@ import { Provider } from 'react-redux';
 import PrivateRoute from './components/PrivateRoute';
 import Overlay from './components/Overlay';
 import NewTaskWizard from './components/NewTaskWizard';
+import CompletedTasks from './pages/CompletedTasks';
+import TodoTasks from './pages/TodoTasks';
+import AllTasks from './pages/AllTasks';
 
 const App = () => {
   const [showTaskWizard, setShowTaskWizard] = useState(false);
@@ -22,7 +25,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Entry />} />
           <Route path="/home" element={<PrivateRoute />}>
-            <Route path="/home" element={<Home setShowTaskWizard={setShowTaskWizard} />} />
+            <Route path="/home" element={<Home setShowTaskWizard={setShowTaskWizard} />}>
+              <Route index element={<AllTasks />} />
+              <Route path="all" element={<AllTasks />} />
+              <Route path="todo" element={<TodoTasks />} />
+              <Route path="completed" element={<CompletedTasks />} />
+            </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

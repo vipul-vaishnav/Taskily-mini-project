@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import Plus from './../icons/Plus';
 import { useSelector } from 'react-redux';
 
@@ -22,23 +22,45 @@ const Home = ({ setShowTaskWizard }) => {
         <div className="w-full mb-4 md:max-w-md">
           <ul className="flex items-center justify-between border-b-2 border-gray-200">
             <li className="w-full text-center">
-              <NavLink to="/" className="block py-3 font-semibold uppercase border-b-4 border-gray-900">
+              <NavLink
+                to="/home/all"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'block py-3 font-semibold uppercase border-gray-900 border-b-4'
+                    : 'block py-3 font-semibold uppercase text-gray-400'
+                }
+              >
                 All
               </NavLink>
             </li>
             <li className="w-full text-center">
-              <NavLink to="/" className="block py-3 font-semibold uppercase">
+              <NavLink
+                to="/home/todo"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'block py-3 font-semibold uppercase border-gray-900 border-b-4'
+                    : 'block py-3 font-semibold uppercase text-gray-400'
+                }
+              >
                 Todo
               </NavLink>
             </li>
             <li className="w-full text-center">
-              <NavLink to="/" className="block py-3 font-semibold uppercase">
+              <NavLink
+                to="/home/completed"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'block py-3 font-semibold uppercase border-gray-900 border-b-4'
+                    : 'block py-3 font-semibold uppercase text-gray-400'
+                }
+              >
                 Completed
               </NavLink>
             </li>
           </ul>
         </div>
       </section>
+      <Outlet />
     </div>
   );
 };
