@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 import { auth } from './../../firebase';
 
@@ -53,6 +54,18 @@ export const googleSignIn = createAsyncThunk('auth/google', async (_, thunkAPI) 
 export const signOutUser = createAsyncThunk('auth/signOut', async (_, thunkAPI) => {
   try {
     await signOut(auth);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+// update displayName
+export const updateDisplayName = createAsyncThunk('auth/updateDisplayName', async (newName, thunkAPI) => {
+  try {
+    await updateProfile(auth.currentUser, {
+      displayName: newName,
+    });
+    return newName;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -122,6 +135,15 @@ export const authSlice = createSlice({
         state.user = null;
         state.isSuccess = true;
         state.message = 'User logged out successfully';
+      })
+      .addCase(updateDisplayName.fulfilled, (state, action) => {
+        state.user.displayName = action.payload;
+        state.isSuccess = true;
+        state.message = 'Display name updated successfully!';
+      })
+      .addCase(updateDisplayName.rejected, (state, action) => {
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });

@@ -1,12 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Plus from './../icons/Plus';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className="max-w-5xl px-4 py-6 mx-auto">
       <h1 className="mb-2 text-xl font-semibold sm:text-3xl">
-        Welcome back! <span className="text-gray-400">%USERNAME%</span>{' '}
+        Welcome back! <span className="text-gray-400">{user && user.displayName ? user.displayName : 'User'}</span>{' '}
       </h1>
       <p className="mb-8 font-medium text-gray-400 md:mb-4">Here are all your tasks!</p>
       <section className="md:items-center md:justify-between md:flex md:flex-row-reverse md:gap-20">
