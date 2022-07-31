@@ -1,12 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTodo } from './../features/todo/todoSlice';
 
 const NewTaskWizard = ({ setShowTaskWizard }) => {
+  const { user } = useSelector((state) => state.auth);
   // For resizing of textarea
   const textArea = useRef(null);
   const handleHeight = (e) => {
     textArea.current.style.height = '100px';
     let scHeight = e.target.scrollHeight;
     textArea.current.style.height = `${scHeight}px`;
+  };
+
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = { name, description, user_ref: user.uid, status: 'pending' };
+    dispatch(addTodo(formData));
   };
 
   return (
@@ -27,10 +41,10 @@ const NewTaskWizard = ({ setShowTaskWizard }) => {
         <div className="mb-1">
           <input
             className="w-full py-2 text-xl font-semibold text-gray-900 placeholder-gray-400 align-baseline bg-transparent font-default focus:outline-none"
-            type="email"
-            name="email"
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Task name here..."
             autoComplete="off"
           />
@@ -40,15 +54,18 @@ const NewTaskWizard = ({ setShowTaskWizard }) => {
             onKeyUp={handleHeight}
             className="w-full py-2 text-gray-900 placeholder-gray-400 align-baseline bg-transparent font-default focus:outline-none max-h-60"
             name="description"
-            // value={}
-            // onChange={(e) => setEmail(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
             autoComplete="off"
             ref={textArea}
             spellCheck={false}
           />
         </div>
-        <button className="flex items-center justify-center w-full gap-4 py-3 mt-5 mb-0 font-extrabold tracking-widest text-center text-white uppercase bg-gray-900 border-2 border-gray-900 rounded-lg md:max-w-xs md:ml-auto">
+        <button
+          onClick={handleSubmit}
+          className="flex items-center justify-center w-full gap-4 py-3 mt-5 mb-0 font-extrabold tracking-widest text-center text-white uppercase bg-gray-900 border-2 border-gray-900 rounded-lg md:max-w-xs md:ml-auto"
+        >
           Add task
         </button>
       </form>

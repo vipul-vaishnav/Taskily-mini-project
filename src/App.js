@@ -21,7 +21,7 @@ import { Provider } from 'react-redux';
 
 const App = () => {
   const [showTaskWizard, setShowTaskWizard] = useState(false);
-  const [showEditTaskWizard, setShowEditTaskWizard] = useState(true);
+  const [showEditTaskWizard, setShowEditTaskWizard] = useState(false);
 
   return (
     <Provider store={store}>

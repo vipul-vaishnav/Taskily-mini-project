@@ -1,18 +1,17 @@
 import React from 'react';
 import LabelCompleted from './LabelCompleted';
+import LabelPending from './LabelPending';
 
-const Task = ({ setShowEditTaskWizard }) => {
+const Task = ({ setShowEditTaskWizard, todo }) => {
   return (
     <div className="p-4 rounded-lg shadow bg-gray-50">
-      <LabelCompleted />
-      <h1 className="mt-4 mb-2 text-2xl font-semibold">Task Name</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem facere deleniti obcaecati animi assumenda, rerum
-        ipsum dolorum aut error nostrum.
-      </p>
+      {todo.status === 'pending' && <LabelPending />}
+      {todo.status === 'completed' && <LabelCompleted />}
+      <h1 className="mt-4 mb-2 text-2xl font-semibold">{todo.name}</h1>
+      <p>{todo.description}</p>
       <div className="flex items-center justify-between mt-4">
         <p className="font-semibold text-gray-400">
-          Create At: <span>{new Date().toLocaleDateString()}</span>
+          Created At: <span>{new Date(todo.timestamp.seconds * 1000).toString().split('GMT')[0]}</span>
         </p>
         <div className="flex gap-4">
           <button onClick={() => setShowEditTaskWizard(true)}>
