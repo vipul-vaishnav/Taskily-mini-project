@@ -6,7 +6,7 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyA20-OGxZjzTtVAE3kRe25mlg_Yqz9vCxE',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'taskily-35b43.firebaseapp.com',
   projectId: 'taskily-35b43',
   storageBucket: 'taskily-35b43.appspot.com',
